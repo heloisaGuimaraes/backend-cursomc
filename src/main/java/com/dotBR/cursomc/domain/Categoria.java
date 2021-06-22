@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Categoria implements Serializable {// Serializable - interface que permite que seus objetos sejam
 												// convertidos em sequencias de bytes
@@ -19,6 +21,8 @@ public class Categoria implements Serializable {// Serializable - interface que 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // gerar o id automaticamente
 	private Integer id;
 	private String nome;
+	
+	@JsonManagedReference//Informando que tudo bem serializar(lado que eu quero ver os dados)
 	@ManyToMany(mappedBy = "categorias")//to falando onde tá a outra ponta da relação
 	private List<Produto> produtos = new ArrayList<>();// inicamos a coleção
 
