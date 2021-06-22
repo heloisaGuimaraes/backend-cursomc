@@ -1,6 +1,8 @@
 package com.dotBR.cursomc.resources;
 //Classe com as definições REST
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,13 @@ public class CategoriaResource {
 	public ResponseEntity<?> findById(@PathVariable Integer id) {
 		Categoria obj = serviceCategoria.findById(id);
 		return ResponseEntity.ok().body(obj);
+	}
+
+	//byMe
+	@RequestMapping(method = RequestMethod.GET) 
+	public ResponseEntity<List<Categoria>> allCategorias() {
+		List<Categoria> list = serviceCategoria.findAll();
+		return ResponseEntity.ok(list);
 	}
 
 }

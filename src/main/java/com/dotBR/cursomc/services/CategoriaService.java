@@ -1,6 +1,7 @@
 package com.dotBR.cursomc.services;
 //Classe para fornecer as respostas para o REST
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +22,9 @@ public class CategoriaService {
 		return obj.orElse(null);
 	}
 
+	// byMe
+	public List<Categoria> findAll() {
+		List<Categoria> list = repo.findAll();
+		return list;
+	}
 }
