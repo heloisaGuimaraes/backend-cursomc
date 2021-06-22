@@ -1,5 +1,5 @@
 package com.dotBR.cursomc.domain;
-
+//Classe modelo do banco de dados
 import java.io.Serializable;
 
 import javax.persistence.Entity;
