@@ -1,5 +1,5 @@
 package com.dotBR.cursomc.resources.exception;
-
+//classe para estruturar as exceções a serem lançadas
 import java.io.Serializable;
 
 public class StandardError implements Serializable {

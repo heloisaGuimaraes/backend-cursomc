@@ -19,7 +19,7 @@ public class CategoriaService {
 
 	public Categoria findById(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new com.dotBR.cursomc.services.ObjectNotFoundException(
+		return obj.orElseThrow(() -> new com.dotBR.cursomc.services.exceptions.ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 

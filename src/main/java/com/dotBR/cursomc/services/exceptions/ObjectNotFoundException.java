@@ -1,9 +1,9 @@
-package com.dotBR.cursomc.services;
-
+package com.dotBR.cursomc.services.exceptions;
+//classe guia para as exceções que o rest vai receber
 public class ObjectNotFoundException extends RuntimeException{
-
 	private static final long serialVersionUID = 1L;
 	
+
 	public ObjectNotFoundException(String message) {
 		super(message);
 		
