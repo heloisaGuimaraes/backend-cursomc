@@ -11,19 +11,22 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.dotBR.cursomc.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Inheritance (strategy = InheritanceType.JOINED)//escolhendo como vamos lidar com a herança, neste caso vamos criar o chamado tabelão
+@Inheritance(strategy = InheritanceType.JOINED) // escolhendo como vamos lidar com a herança, neste caso vamos criar o
+												// chamado tabelão
 public abstract class Pagamento implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private Integer id;
 	private Integer estado;
-	
+
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
-	@MapsId//garantido que o id do pagamento será o mesmo do pedido
+	@MapsId // garantido que o id do pagamento será o mesmo do pedido
 	private Pedido pedido;
 
 	public Pagamento() {
@@ -85,9 +88,5 @@ public abstract class Pagamento implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
 
 }
