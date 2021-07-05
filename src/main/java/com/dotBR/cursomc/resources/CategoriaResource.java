@@ -24,13 +24,13 @@ public class CategoriaResource {
 	private CategoriaService serviceCategoria;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET) // Cada operação deve estar ligada a um verbo do http
-	public ResponseEntity<?> findById(@PathVariable Integer id) {
+	public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
 		Categoria obj = serviceCategoria.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	// byMe
-	@RequestMapping(value = "/all",method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<Categoria>> allCategorias() {
 		List<Categoria> list = serviceCategoria.findAll();
 		return ResponseEntity.ok(list);
@@ -42,5 +42,12 @@ public class CategoriaResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Categoria> update(@PathVariable Integer id, @RequestBody Categoria obj) {
+		obj.setId(id);//garantir a atualização
+		serviceCategoria.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 }
