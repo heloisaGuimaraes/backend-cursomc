@@ -28,4 +28,9 @@ public class CategoriaService {
 		List<Categoria> list = repo.findAll();
 		return list;
 	}
+	
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);//caso o id seja igual a um que já existe é atualização
+		return repo.save(obj);
+	}
 }

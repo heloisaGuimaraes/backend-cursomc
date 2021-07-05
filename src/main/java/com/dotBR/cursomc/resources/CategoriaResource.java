@@ -1,14 +1,17 @@
 package com.dotBR.cursomc.resources;
 //Classe com as definições REST
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.dotBR.cursomc.domain.Categoria;
 import com.dotBR.cursomc.services.CategoriaService;
@@ -26,11 +29,18 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 
-	//byMe
-	@RequestMapping(method = RequestMethod.GET) 
+	// byMe
+	@RequestMapping(value = "/all",method = RequestMethod.GET)
 	public ResponseEntity<List<Categoria>> allCategorias() {
 		List<Categoria> list = serviceCategoria.findAll();
 		return ResponseEntity.ok(list);
 	}
 
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@RequestBody Categoria obj) {
+		obj = serviceCategoria.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+
+	}
 }
