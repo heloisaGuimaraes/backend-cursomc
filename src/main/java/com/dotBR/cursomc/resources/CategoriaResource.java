@@ -50,4 +50,12 @@ public class CategoriaResource {
 		serviceCategoria.update(obj);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE) // Cada operação deve estar ligada a um verbo do http
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		serviceCategoria.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+	
+	
 }
