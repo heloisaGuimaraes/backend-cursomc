@@ -3,12 +3,14 @@ package com.dotBR.cursomc.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.dotBR.cursomc.domain.Categoria;
+import com.dotBR.cursomc.dto.CategoriaDTO;
 import com.dotBR.cursomc.repositories.CategoriaRepository;
 import com.dotBR.cursomc.services.exceptions.DataIntegrityException;
 
@@ -26,9 +28,10 @@ public class CategoriaService {
 	}
 
 	// byMe
-	public List<Categoria> findAll() {
+	public List<CategoriaDTO> findAll() {
 		List<Categoria> list = repo.findAll();
-		return list;
+		List<CategoriaDTO> finalList = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		return finalList;
 	}
 
 	public Categoria insert(Categoria obj) {
@@ -40,13 +43,13 @@ public class CategoriaService {
 		this.findById(obj.getId());
 		return repo.save(obj);
 	}
-	
+
 	public void delete(Integer id) {
 		findById(id);
 		try {
-			repo.deleteById(id);			
-		}catch (DataIntegrityViolationException e) {
+			repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possivel excluir uma categoria com produtos cadastrados");
-		}		
+		}
 	}
 }

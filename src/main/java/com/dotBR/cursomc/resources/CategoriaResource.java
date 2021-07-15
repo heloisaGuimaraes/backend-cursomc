@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.dotBR.cursomc.domain.Categoria;
+import com.dotBR.cursomc.dto.CategoriaDTO;
 import com.dotBR.cursomc.services.CategoriaService;
 
 @RestController
@@ -29,10 +30,9 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 
-	// byMe
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public ResponseEntity<List<Categoria>> allCategorias() {
-		List<Categoria> list = serviceCategoria.findAll();
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<CategoriaDTO>> allCategorias() {
+		List<CategoriaDTO> list = serviceCategoria.findAll();
 		return ResponseEntity.ok(list);
 	}
 
@@ -46,16 +46,16 @@ public class CategoriaResource {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Categoria> update(@PathVariable Integer id, @RequestBody Categoria obj) {
-		obj.setId(id);//garantir a atualização
+		obj.setId(id);// garantir a atualização
 		serviceCategoria.update(obj);
 		return ResponseEntity.noContent().build();
 	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE) // Cada operação deve estar ligada a um verbo do http
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE) // Cada operação deve estar ligada a um verbo do
+																	// http
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		serviceCategoria.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
+
 }
