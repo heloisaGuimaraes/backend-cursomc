@@ -38,7 +38,7 @@ public class Cliente implements Serializable {
 	@CollectionTable(name = "TELEFONE") // tabela extra, entidade fraca
 	private Set<String> telefones = new HashSet<>();
 
-	@JsonIgnore//não deixa serializar
+	@JsonIgnore // não deixa serializar
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
 	public Integer getId() {
